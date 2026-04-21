@@ -47,7 +47,7 @@ public class Costumer {
     @NotBlank(message = "Numărul de telefon este obligatoriu")
     private String phone;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "costumer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;
 
     @Override

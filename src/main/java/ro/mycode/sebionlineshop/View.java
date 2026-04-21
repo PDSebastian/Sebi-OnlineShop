@@ -10,6 +10,11 @@ import ro.mycode.sebionlineshop.costumers.model.Costumer;
 import ro.mycode.sebionlineshop.costumers.repository.CostumerRepository;
 import ro.mycode.sebionlineshop.costumers.service.commandService.CostumerCommandservice;
 import ro.mycode.sebionlineshop.costumers.service.queryService.CostumerQueryService;
+import ro.mycode.sebionlineshop.options.exceptions.OptionNotFoundException;
+import ro.mycode.sebionlineshop.options.model.Option;
+import ro.mycode.sebionlineshop.options.repository.Optionrepository;
+import ro.mycode.sebionlineshop.options.service.commandService.OptionCommandService;
+import ro.mycode.sebionlineshop.options.service.queryService.OptionQueryService;
 import ro.mycode.sebionlineshop.products.exceptions.ProductNotFoundException;
 import ro.mycode.sebionlineshop.products.model.Product;
 import ro.mycode.sebionlineshop.products.repository.ProductRepository;
@@ -21,6 +26,7 @@ import java.util.List;
 @Component
 public class View {
     private final CostumerRepository costumerRepository;
+    private final Optionrepository optionrepository;
     ProductCommandService  productCommandService;
     ProductRepository productRepository;
     ProductQueryService productQueryService;
@@ -29,9 +35,12 @@ public class View {
     CategoryQueryService categoryQueryService;
     CostumerCommandservice costumerCommandservice;
     CostumerQueryService costumerQueryService;
+    OptionCommandService optionCommandService;
+    OptionQueryService optionQueryService;
     public View(ProductCommandService productCommandService, ProductRepository productRepository, ProductQueryService productQueryService,
                 CategoryCommandService categoryCommandService, CategoryRepository categoryRepository, CategoryQueryService categoryQueryServic,
-                CostumerCommandservice costumerCommandservice, CostumerQueryService costumerQueryService, CostumerRepository costumerRepository) {
+                CostumerCommandservice costumerCommandservice, CostumerQueryService costumerQueryService, CostumerRepository costumerRepository,
+                OptionCommandService optionCommandService, OptionQueryService optionQueryService, Optionrepository optionrepository) {
         this.productCommandService = productCommandService;
         this.productRepository = productRepository;
         this.productQueryService = productQueryService;
@@ -40,6 +49,11 @@ public class View {
         this.costumerQueryService = costumerQueryService;
         this.costumerCommandservice = costumerCommandservice;
         this.costumerRepository = costumerRepository;
+        this.optionCommandService = optionCommandService;
+        this.optionQueryService = optionQueryService;
+        this.optionrepository = optionrepository;
+        testGetOptionByName();
+
     }
     void testAddProduct() {
             Product p = Product.builder()
@@ -110,6 +124,45 @@ public class View {
     void testGetCategoryById() {
         Category c=categoryRepository.findById(1L).orElseThrow(() -> new CategoryNotFoundException("Category not found"));
         System.out.println(c);
+    }
+    void testAddOption() {
+        Option o=Option.builder().optionName("dwfwfwfw").build();
+        optionrepository.save(o);
+    }
+    void testUpdateOption() {
+        Option o=optionrepository.findById(4L).orElseThrow(()->new OptionNotFoundException("Option not found"));
+        o.setOptionName("Nuwdwdwdw");
+        optionrepository.save(o);
+
+    }
+    void testDeleteOption() {
+        if(optionrepository.existsById(4L))
+        {
+            optionrepository.deleteById(4L);
+        }
+        else {
+            throw new OptionNotFoundException("Option not found");
+        }
+    }
+    void testGetAllOptions() {
+        List<Option> options =optionrepository.findAll();
+        options.forEach(System.out::println);
+    }
+    void testGetOptionById() {
+        if(optionrepository.existsById(6L)) {
+            System.out.println(optionrepository.findById(6L).get());
+        }
+        else {
+            throw new OptionNotFoundException("Option not found");
+        }
+    }
+    void testGetOptionByName() {
+        if(optionrepository.findByOptionName("dwfwfwfw").isPresent()) {
+            System.out.println(optionrepository.findByOptionName("dwfwfwfw").get());
+        }
+        else {
+            throw new OptionNotFoundException("Option not found");
+        }
     }
 
 

@@ -2,11 +2,10 @@ package ro.mycode.sebionlineshop.options.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import ro.mycode.sebionlineshop.productOptions.model.ProductOption;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +14,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Option {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,10 @@ public class Option {
     @NotBlank(message = "Numele opțiunii este obligatorie")
     @Column(name = "option_name")
     private String optionName;
+
+    @OneToMany(mappedBy = "option", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductOption> productOptions;
+
 
 
     @Override
