@@ -23,7 +23,6 @@ import ro.mycode.sebionlineshop.products.service.queryService.ProductQueryServic
 
 import java.util.List;
 
-@Component
 public class View {
     private final CostumerRepository costumerRepository;
     private final Optionrepository optionrepository;

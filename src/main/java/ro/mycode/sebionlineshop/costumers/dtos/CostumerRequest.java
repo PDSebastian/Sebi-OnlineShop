@@ -1,7 +1,9 @@
 package ro.mycode.sebionlineshop.costumers.dtos;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 
+@Builder
 public record CostumerRequest(
         @NotBlank(message = "Emailul este obligatoriu")
      String email,

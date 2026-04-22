@@ -1,4 +1,4 @@
-package ro.mycode.integration;
+package ro.mycode.integrationTests;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
