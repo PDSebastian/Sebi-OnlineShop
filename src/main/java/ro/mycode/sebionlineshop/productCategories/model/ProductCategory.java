@@ -1,10 +1,7 @@
 package ro.mycode.sebionlineshop.productCategories.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ro.mycode.sebionlineshop.categories.model.Category;
 import ro.mycode.sebionlineshop.products.model.Product;
 
@@ -16,6 +13,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
