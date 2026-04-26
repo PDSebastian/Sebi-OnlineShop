@@ -15,5 +15,7 @@ public class ErrorConstants {
     public static final String ORDER_ALREADY_EXISTS_EXCEPTION = "Order already exists";
     public static final String PRODUCTCATEGORY_ALREADY_EXISTS_EXCEPTION = "Product category already exists";
     public static final String PRODUCTCATEGORY_NOT_FOUND_EXCEPTION = "Product category not found";
+    public static final String ProductOptionALREADY_EXISTS_EXCEPTION = "Product option already exists";
+    public static final String ProductOptionNOT_FOUND_EXCEPTION = "Product option not found";
 
 }

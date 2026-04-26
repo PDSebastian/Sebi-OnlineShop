@@ -37,14 +37,20 @@ public class ProductCategoryQueryServiceImpl implements ProductCAtegoryQueryServ
 
     @Override
     public List<ProductCategoryResponse> getCategoriesByProductId(Long productId) {
-        return productCategoryRepository.findById(productId)
-                .map(ProductCategoryMapper::toDto)
-                .orElseThrow(()->new ProductCategoryNotFoundException());
+        List<ProductCategory> categories = productCategoryRepository.findAllByProductId(productId);
+        if(categories.isEmpty()){
+            throw new ProductCategoryNotFoundException();
+        }
+        return categories.stream().map(ProductCategoryMapper::toDto).toList();
 
     }
 
     @Override
     public List<ProductCategoryResponse> getProductsByCategoryId(Long categoryId) {
-        return List.of();
+        List<ProductCategory> products = productCategoryRepository.findAllByCategoryId(categoryId);
+        if (products.isEmpty()) {
+            throw new ProductCategoryNotFoundException();
+        }
+        return products.stream().map(ProductCategoryMapper::toDto).toList();
     }
 }

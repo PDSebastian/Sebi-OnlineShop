@@ -15,6 +15,8 @@ import ro.mycode.sebionlineshop.orders.exceptions.OrderAlreadyExistsException;
 import ro.mycode.sebionlineshop.orders.exceptions.OrderNotFoundException;
 import ro.mycode.sebionlineshop.productCategories.exceptions.ProductCategoryAlreadyExistsException;
 import ro.mycode.sebionlineshop.productCategories.exceptions.ProductCategoryNotFoundException;
+import ro.mycode.sebionlineshop.productOptions.exceptions.ProductOptionAlreadyExistsException;
+import ro.mycode.sebionlineshop.productOptions.exceptions.ProductOptionNotFoundException;
 import ro.mycode.sebionlineshop.products.exceptions.ProductAlreadyExistsException;
 import ro.mycode.sebionlineshop.products.exceptions.ProductNotFoundException;
 
@@ -29,7 +31,8 @@ public class GlobalExceptionHandler {
                 ProductAlreadyExistsException.class,
                 OrderDetailAlreadyExistsException.class,
                 OrderAlreadyExistsException.class,
-                ProductCategoryAlreadyExistsException.class
+                ProductCategoryAlreadyExistsException.class,
+                ProductOptionAlreadyExistsException.class,
 
 
         })
@@ -49,7 +52,8 @@ public class GlobalExceptionHandler {
              ProductNotFoundException.class,
              OrderDetailNotFoundException.class,
              OrderNotFoundException.class,
-             ProductCategoryNotFoundException.class
+             ProductCategoryNotFoundException.class,
+             ProductOptionNotFoundException.class,
 
         })
     public ResponseEntity<ApiErrorResponse>handleNotFound(RuntimeException e){
