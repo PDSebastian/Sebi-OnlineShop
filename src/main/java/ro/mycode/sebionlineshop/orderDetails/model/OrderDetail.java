@@ -3,10 +3,7 @@ package ro.mycode.sebionlineshop.orderDetails.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ro.mycode.sebionlineshop.orders.model.Order;
 import ro.mycode.sebionlineshop.products.model.Product;
 
@@ -19,6 +16,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

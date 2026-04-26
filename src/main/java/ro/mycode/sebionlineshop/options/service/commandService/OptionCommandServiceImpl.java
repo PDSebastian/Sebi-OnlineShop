@@ -20,7 +20,7 @@ public class OptionCommandServiceImpl implements OptionCommandService {
     @Transactional
     public OptionResponse addOption(OptionRequest optionRequest) {
         optionrepository.findByOptionName(optionRequest.name()).ifPresent(o -> {
-            throw new OptionAlreadyExistsException("Option already exists");
+            throw new OptionAlreadyExistsException();
         });
         Option option = OptionMapper.toEntity(optionRequest);
         Option saved = optionrepository.save(option);
@@ -31,7 +31,7 @@ public class OptionCommandServiceImpl implements OptionCommandService {
     @Transactional
     public OptionResponse updateOption(OptionRequest optionRequest) {
         Option option = optionrepository.findByOptionName(optionRequest.name())
-                .orElseThrow(() -> new OptionNotFoundException("Option not found"));
+                .orElseThrow(() -> new OptionNotFoundException());
 
         option.setOptionName(optionRequest.name());
         Option saved = optionrepository.save(option);
@@ -42,7 +42,7 @@ public class OptionCommandServiceImpl implements OptionCommandService {
     @Transactional
     public OptionResponse deleteOption(OptionRequest optionRequest) {
         Option option = optionrepository.findByOptionName(optionRequest.name())
-                .orElseThrow(() -> new OptionNotFoundException("Option not found"));
+                .orElseThrow(() -> new OptionNotFoundException());
 
         OptionResponse response = OptionMapper.toDto(option);
         optionrepository.delete(option);

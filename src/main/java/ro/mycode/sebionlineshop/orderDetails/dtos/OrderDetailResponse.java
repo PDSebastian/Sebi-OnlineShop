@@ -1,8 +1,10 @@
 package ro.mycode.sebionlineshop.orderDetails.dtos;
 
-import java.time.LocalDateTime;
+import lombok.Builder;
 
-public record OrederDetailResponse(
+import java.time.LocalDateTime;
+@Builder
+public record OrderDetailResponse(
         Long id,
         Double amount,
         String shippingAdress,

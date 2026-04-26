@@ -26,14 +26,14 @@ public class OptionQueryServiceImpl implements OptionQueryService {
     @Override
     public OptionResponse getOptionById(Long id) {
         Option option = optionrepository.findById(id)
-                .orElseThrow(() -> new OptionNotFoundException("Option not found"));
+                .orElseThrow(() -> new OptionNotFoundException());
         return OptionMapper.toDto(option);
     }
 
     @Override
     public OptionResponse getOptionByName(String name) {
         Option option = optionrepository.findByOptionName(name)
-                .orElseThrow(() -> new OptionNotFoundException("Option not found"));
+                .orElseThrow(() -> new OptionNotFoundException());
         return OptionMapper.toDto(option);
     }
 }

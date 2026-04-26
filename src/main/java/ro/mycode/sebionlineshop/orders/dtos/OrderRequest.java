@@ -1,36 +1,25 @@
-package ro.mycode.sebionlineshop.orderDetails.dtos;
+package ro.mycode.sebionlineshop.orders.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
 @Builder
-
-public record OrederDetailRequest(
+public record OrderRequest(
         @NotNull(message = "Suma totală este obligatorie")
-         Double amount,
+        Double amount,
         @NotBlank(message = "Adresa de livrare este obligatorie")
-        String shippingAdress,
+        String shippingAddress,
         @NotBlank(message = "Adresa este obligatorie")
-        String orderAdress,
+        String orderAddress,
         @NotBlank(message = "Emailul este obligatoriu")
         String orderEmail,
         @NotNull(message = "Data este obligatorie")
         LocalDateTime orderDate,
         @NotBlank(message = "Statutul comenzii este obligatoriu")
         String orderStatus
-
-
-
-
-
-
 
 ) {
 }

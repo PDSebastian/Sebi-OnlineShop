@@ -28,7 +28,7 @@ public class CategoryQueryServiceImpl implements  CategoryQueryService {
     @Override
     public CategoryResponse getCategoryById(Long id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new CategoryNotFoundException("Category  not found."));
+                .orElseThrow(() -> new CategoryNotFoundException());
         return CategoryMapper.toDto(category);
     }
 }

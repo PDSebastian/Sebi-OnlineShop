@@ -70,7 +70,7 @@ public class View {
     }
     void testUpdateProduct() {
         Product s = productRepository.findById(1L)
-                .orElseThrow(() -> new ProductNotFoundException("Product not found"));
+                .orElseThrow(() -> new ProductNotFoundException());
         s.setName("Nuwdwdwdwdw");
         s.setPrice(15);
         s.setDescription("O ddwdwdwdwd");
@@ -83,7 +83,7 @@ public class View {
            productRepository.deleteById(10L);
        }
        else {
-           throw new ProductNotFoundException("Product not found");
+           throw new ProductNotFoundException();
        }
 
     }
@@ -93,7 +93,7 @@ public class View {
 
     }
     void testGetProductById() {
-       Product p=productRepository.findById(10L).orElseThrow(() -> new ProductNotFoundException("Product not found"));
+       Product p=productRepository.findById(10L).orElseThrow(() -> new ProductNotFoundException());
        System.out.println(p);
     }
     void testAddCategory() {
@@ -102,7 +102,7 @@ public class View {
     }
     void testUpdateCategory() {
         Category c=categoryRepository.findById(3L)
-                .orElseThrow(()-> new CategoryNotFoundException("Category not found"));
+                .orElseThrow(()-> new CategoryNotFoundException());
         c.setName("Nuwdwdwdwdw");
         c.setDescription("O ddwdwdwdw");
         c.setThumbnail("fwfwfw");
@@ -113,7 +113,7 @@ public class View {
             categoryRepository.deleteById(3L);
         }
         else {
-            throw new CategoryNotFoundException("Category not found");
+            throw new CategoryNotFoundException();
         }
     }
     void testGetAllCategories() {
@@ -121,7 +121,7 @@ public class View {
         categories.forEach(System.out::println);
     }
     void testGetCategoryById() {
-        Category c=categoryRepository.findById(1L).orElseThrow(() -> new CategoryNotFoundException("Category not found"));
+        Category c=categoryRepository.findById(1L).orElseThrow(() -> new CategoryNotFoundException());
         System.out.println(c);
     }
     void testAddOption() {
@@ -129,7 +129,7 @@ public class View {
         optionrepository.save(o);
     }
     void testUpdateOption() {
-        Option o=optionrepository.findById(4L).orElseThrow(()->new OptionNotFoundException("Option not found"));
+        Option o=optionrepository.findById(4L).orElseThrow(()->new OptionNotFoundException());
         o.setOptionName("Nuwdwdwdw");
         optionrepository.save(o);
 
@@ -140,7 +140,7 @@ public class View {
             optionrepository.deleteById(4L);
         }
         else {
-            throw new OptionNotFoundException("Option not found");
+            throw new OptionNotFoundException();
         }
     }
     void testGetAllOptions() {
@@ -152,7 +152,7 @@ public class View {
             System.out.println(optionrepository.findById(6L).get());
         }
         else {
-            throw new OptionNotFoundException("Option not found");
+            throw new OptionNotFoundException();
         }
     }
     void testGetOptionByName() {
@@ -160,7 +160,7 @@ public class View {
             System.out.println(optionrepository.findByOptionName("dwfwfwfw").get());
         }
         else {
-            throw new OptionNotFoundException("Option not found");
+            throw new OptionNotFoundException();
         }
     }
 

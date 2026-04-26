@@ -19,7 +19,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
     @Transactional
     public ProductResponse addProduct(ProductRequest productRequest) {
         productRepository.findById(productRequest.id())
-                .ifPresent(product -> {throw new ProductAlreadyExistsException("Product already exists");});
+                .ifPresent(product -> {throw new ProductAlreadyExistsException();});
         Product p= ProductMapper.toEntity(productRequest);
         Product sp= productRepository.save(p);
         return ProductMapper.toDto(sp);
@@ -29,7 +29,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
     @Transactional
     public ProductResponse updateProduct(ProductRequest productRequest) {
         Product product = productRepository.findById(productRequest.id())
-                .orElseThrow(() ->new ProductNotFoundException("Product not found"));
+                .orElseThrow(() ->new ProductNotFoundException());
         product.setName(productRequest.name());
         product.setPrice(productRequest.price());
         product.setWeight(productRequest.weight());
@@ -47,7 +47,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
     @Transactional
     public ProductResponse deleteProduct(ProductRequest productRequest) {
         Product product=productRepository.findById(productRequest.id())
-                .orElseThrow(() ->new ProductNotFoundException("Product not found"));
+                .orElseThrow(() ->new ProductNotFoundException());
         ProductResponse response = ProductMapper.toDto(product);
         productRepository.delete(product);
         return response;

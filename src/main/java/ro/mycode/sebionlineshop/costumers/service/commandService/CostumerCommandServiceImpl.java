@@ -21,7 +21,7 @@ public class CostumerCommandServiceImpl implements  CostumerCommandservice {
     @Transactional
     public CostumerResponse addCostumer(CostumerRequest costumerRequest) {
         costumerRepository.findByEmail(costumerRequest.email()).ifPresent(c -> {
-            throw new CostumerAlreadyExistsException("Email already exists");
+            throw new CostumerAlreadyExistsException();
         });
 
         Costumer costumer = CosutmerMapper.toEntity(costumerRequest);
@@ -34,7 +34,7 @@ public class CostumerCommandServiceImpl implements  CostumerCommandservice {
     @Transactional
     public CostumerResponse updateCostumer(CostumerRequest costumerRequest) {
         Costumer costumer = costumerRepository.findByEmail(costumerRequest.email())
-                .orElseThrow(() -> new CostumerNotFoundException("Costumer not found"));
+                .orElseThrow(() -> new CostumerNotFoundException());
 
         costumer.setFullName(costumerRequest.fullName());
         costumer.setPhone(costumerRequest.phone());
@@ -51,7 +51,7 @@ public class CostumerCommandServiceImpl implements  CostumerCommandservice {
     @Transactional
     public CostumerResponse deleteCostumer(CostumerRequest costumerRequest) {
         Costumer costumer = costumerRepository.findByEmail(costumerRequest.email())
-                .orElseThrow(() -> new CostumerNotFoundException("Costumer not found"));
+                .orElseThrow(() -> new CostumerNotFoundException());
         CostumerResponse response = CosutmerMapper.toDto(costumer);
         costumerRepository.delete(costumer);
 

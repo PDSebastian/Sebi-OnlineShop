@@ -26,7 +26,7 @@ public class ProductQueryServiceImpl implements ProductQueryService {
     @Override
     public ProductResponse getProductById(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException("Product not found"));
+                .orElseThrow(() -> new ProductNotFoundException());
         return ProductMapper.toDto(product);
     }
 }

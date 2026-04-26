@@ -21,7 +21,7 @@ public class CategoryCommandServiceImpl implements CategoryCommandService {
     @Transactional
     public CategoryResponse addCategory(CategoryRequest categoryRequest) {
         categoryRepository.findByName(categoryRequest.name())
-                .ifPresent(category -> {throw new CategoryAlreadyexistsException("category already exists");
+                .ifPresent(category -> {throw new CategoryAlreadyexistsException();
                 });
         Category category = CategoryMapper.toEntity(categoryRequest);
         Category c= categoryRepository.save(category);
@@ -32,7 +32,7 @@ public class CategoryCommandServiceImpl implements CategoryCommandService {
     @Transactional
     public CategoryResponse updateCategory(CategoryRequest categoryRequest) {
         Category category = categoryRepository.findByName(categoryRequest.name())
-                .orElseThrow(() -> new CategoryNotFoundException("Category not found:"));
+                .orElseThrow(() -> new CategoryNotFoundException());
         category.setName(categoryRequest.name());
         category.setDescription(categoryRequest.description());
         categoryRepository.save(category);
@@ -41,9 +41,9 @@ public class CategoryCommandServiceImpl implements CategoryCommandService {
 
     @Override
     @Transactional
-    public CategoryResponse deleteCategory(CategoryRequest categoryRequest) {
-       Category c=categoryRepository.findByName(categoryRequest.name())
-                .orElseThrow(() -> new CategoryNotFoundException("Category not found:"));
+    public CategoryResponse deleteCategory(Long id) {
+       Category c=categoryRepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFoundException());
        categoryRepository.delete(c);
         return CategoryMapper.toDto(c);
 

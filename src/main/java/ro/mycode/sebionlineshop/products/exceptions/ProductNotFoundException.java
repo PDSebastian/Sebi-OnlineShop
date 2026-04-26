@@ -1,7 +1,9 @@
 package ro.mycode.sebionlineshop.products.exceptions;
 
+import ro.mycode.sebionlineshop.system.constants.ErrorConstants;
+
 public class ProductNotFoundException extends RuntimeException {
-    public ProductNotFoundException(String message) {
-        super(message);
+    public ProductNotFoundException() {
+        super(ErrorConstants.PRODUCT_NOT_FOUND_EXCEPTION);
     }
 }

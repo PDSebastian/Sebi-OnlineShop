@@ -6,5 +6,5 @@ import ro.mycode.sebionlineshop.categories.dtos.CategoryResponse;
 public interface CategoryCommandService {
     CategoryResponse addCategory(CategoryRequest categoryRequest);
     CategoryResponse updateCategory(CategoryRequest categoryRequest);
-    CategoryResponse deleteCategory(CategoryRequest categoryRequest);
+    CategoryResponse deleteCategory(Long id);
 }

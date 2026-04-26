@@ -1,7 +1,9 @@
 package ro.mycode.sebionlineshop.categories.exceptions;
 
+import ro.mycode.sebionlineshop.system.constants.ErrorConstants;
+
 public class CategoryAlreadyexistsException extends RuntimeException {
-    public CategoryAlreadyexistsException(String message) {
-        super(message);
+    public CategoryAlreadyexistsException() {
+        super(ErrorConstants.CATEGORY_ALREADY_EXISTS_EXCEPTION);
     }
 }
