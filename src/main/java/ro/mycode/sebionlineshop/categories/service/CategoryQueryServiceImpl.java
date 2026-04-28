@@ -1,4 +1,4 @@
-package ro.mycode.sebionlineshop.categories.service.queryService;
+package ro.mycode.sebionlineshop.categories.service;
 
 import org.springframework.stereotype.Component;
 import ro.mycode.sebionlineshop.categories.dtos.CategoryResponse;
@@ -10,7 +10,7 @@ import ro.mycode.sebionlineshop.categories.repository.CategoryRepository;
 import java.util.List;
 
 @Component
-public class CategoryQueryServiceImpl implements  CategoryQueryService {
+public class CategoryQueryServiceImpl implements CategoryQueryService {
     CategoryRepository  categoryRepository;
     public CategoryQueryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;

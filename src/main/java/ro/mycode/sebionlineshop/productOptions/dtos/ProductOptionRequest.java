@@ -5,6 +5,7 @@ import lombok.Builder;
 
 @Builder
 public record ProductOptionRequest(
+        Long id,
         @NotNull(message = "ID-ul produsului este obligatoriu")
         Long productId,
 

@@ -1,6 +1,5 @@
-package ro.mycode.sebionlineshop.products.service.queryService;
+package ro.mycode.sebionlineshop.products.service;
 
-import ro.mycode.sebionlineshop.products.dtos.ProductRequest;
 import ro.mycode.sebionlineshop.products.dtos.ProductResponse;
 
 import java.util.List;

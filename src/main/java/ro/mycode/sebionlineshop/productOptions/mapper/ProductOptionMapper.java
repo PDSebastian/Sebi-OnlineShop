@@ -16,10 +16,11 @@ public class ProductOptionMapper {
                 .build();
 
         Option option = Option.builder()
-                .id(productOptionRequest.optionId())
+                .id(productOptionRequest.id())
                 .build();
 
         return ProductOption.builder()
+                .id(productOptionRequest.id())
                 .product(product)
                 .option(option)
                 .build();

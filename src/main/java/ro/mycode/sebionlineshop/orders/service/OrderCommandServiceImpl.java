@@ -24,12 +24,12 @@ public class OrderCommandServiceImpl implements OrderCommandService {
     @Override
     @Transactional
     public OrderResponse addOrder(Order order) {
-        if(orderRepository.existsById(order.getId())){
-        throw new OrderAlreadyExistsException();
+        if (order.getId() != null && orderRepository.existsById(order.getId())) {
+            throw new OrderAlreadyExistsException();
         }
+
         Order savedOrder = orderRepository.save(order);
         return OrderMapper.toDto(savedOrder);
-
     }
 
     @Override

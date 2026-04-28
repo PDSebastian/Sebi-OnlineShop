@@ -1,4 +1,4 @@
-package ro.mycode.sebionlineshop.options.service.queryService;
+package ro.mycode.sebionlineshop.options.service;
 
 import ro.mycode.sebionlineshop.options.dtos.OptionResponse;
 

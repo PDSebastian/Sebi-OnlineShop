@@ -1,4 +1,4 @@
-package ro.mycode.sebionlineshop.costumers.service.queryService;
+package ro.mycode.sebionlineshop.costumers.service;
 
 import ro.mycode.sebionlineshop.costumers.dtos.CostumerResponse;
 

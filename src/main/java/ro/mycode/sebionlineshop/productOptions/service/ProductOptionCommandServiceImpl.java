@@ -20,7 +20,7 @@ public class ProductOptionCommandServiceImpl implements ProductOptionCommandServ
     @Override
     @Transactional
     public ProductOptionResponse addProductOption(ProductOption productOption) {
-        if (productOptionRepository.existsById(productOption.getProduct().getId())) {
+        if (!productOptionRepository.existsById(productOption.getProduct().getId())) {
             throw new ProductCategoryAlreadyExistsException();
         }
         ProductOption saved = productOptionRepository.save(productOption);
@@ -30,7 +30,7 @@ public class ProductOptionCommandServiceImpl implements ProductOptionCommandServ
     @Override
     @Transactional
     public ProductOptionResponse updateProductOption(ProductOption productOption) {
-        if (!productOptionRepository.existsById(productOption.getProduct().getId())) {
+        if (!productOptionRepository.existsById(productOption.getId())) {
             throw new ProductOptionNotFoundException();
         }
         ProductOption updated = productOptionRepository.save(productOption);

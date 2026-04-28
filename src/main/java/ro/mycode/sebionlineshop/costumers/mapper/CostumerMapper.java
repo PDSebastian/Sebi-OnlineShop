@@ -4,7 +4,7 @@ import ro.mycode.sebionlineshop.costumers.dtos.CostumerRequest;
 import ro.mycode.sebionlineshop.costumers.dtos.CostumerResponse;
 import ro.mycode.sebionlineshop.costumers.model.Costumer;
 
-public class CosutmerMapper {
+public class CostumerMapper {
     public static Costumer toEntity(CostumerRequest costumerRequest) {
         if(costumerRequest == null) return null;
         return Costumer.builder()

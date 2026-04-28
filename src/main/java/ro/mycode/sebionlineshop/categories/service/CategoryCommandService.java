@@ -1,4 +1,4 @@
-package ro.mycode.sebionlineshop.categories.service.commandService;
+package ro.mycode.sebionlineshop.categories.service;
 
 import ro.mycode.sebionlineshop.categories.dtos.CategoryRequest;
 import ro.mycode.sebionlineshop.categories.dtos.CategoryResponse;

@@ -4,16 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.web.servlet.support.WebContentGenerator;
 import ro.mycode.sebionlineshop.categories.dtos.CategoryRequest;
 import ro.mycode.sebionlineshop.categories.dtos.CategoryResponse;
 import ro.mycode.sebionlineshop.categories.model.Category;
 import ro.mycode.sebionlineshop.categories.repository.CategoryRepository;
-import ro.mycode.sebionlineshop.categories.service.commandService.CategoryCommandService;
-import ro.mycode.sebionlineshop.categories.service.commandService.CategoryCommandServiceImpl;
+import ro.mycode.sebionlineshop.categories.service.CategoryCommandService;
+import ro.mycode.sebionlineshop.categories.service.CategoryCommandServiceImpl;
 
 
 import java.util.Optional;

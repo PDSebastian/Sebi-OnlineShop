@@ -9,8 +9,8 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import ro.mycode.sebionlineshop.categories.dtos.CategoryResponse;
 import ro.mycode.sebionlineshop.categories.model.Category;
 import ro.mycode.sebionlineshop.categories.repository.CategoryRepository;
-import ro.mycode.sebionlineshop.categories.service.queryService.CategoryQueryService;
-import ro.mycode.sebionlineshop.categories.service.queryService.CategoryQueryServiceImpl;
+import ro.mycode.sebionlineshop.categories.service.CategoryQueryService;
+import ro.mycode.sebionlineshop.categories.service.CategoryQueryServiceImpl;
 
 import java.util.List;
 import java.util.Optional;

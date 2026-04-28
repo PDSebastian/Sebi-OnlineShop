@@ -1,4 +1,4 @@
-package ro.mycode.sebionlineshop.products.service.queryService;
+package ro.mycode.sebionlineshop.products.service;
 
 import org.springframework.stereotype.Component;
 import ro.mycode.sebionlineshop.products.dtos.ProductResponse;

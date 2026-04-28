@@ -1,4 +1,4 @@
-package ro.mycode.sebionlineshop.categories.service.commandService;
+package ro.mycode.sebionlineshop.categories.service;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

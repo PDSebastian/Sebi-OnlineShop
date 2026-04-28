@@ -1,8 +1,7 @@
-package ro.mycode.sebionlineshop.options.service.commandService;
+package ro.mycode.sebionlineshop.options.service;
 
 import ro.mycode.sebionlineshop.options.dtos.OptionRequest;
 import ro.mycode.sebionlineshop.options.dtos.OptionResponse;
-import ro.mycode.sebionlineshop.options.model.Option;
 
 public interface OptionCommandService {
     OptionResponse addOption(OptionRequest optionRequest);

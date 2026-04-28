@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.mycode.sebionlineshop.categories.dtos.CategoryRequest;
 import ro.mycode.sebionlineshop.categories.dtos.CategoryResponse;
-import ro.mycode.sebionlineshop.categories.service.commandService.CategoryCommandService;
-import ro.mycode.sebionlineshop.categories.service.queryService.CategoryQueryService;
+import ro.mycode.sebionlineshop.categories.service.CategoryCommandService;
+import ro.mycode.sebionlineshop.categories.service.CategoryQueryService;
 
 @RestController
 @RequestMapping("/api/v2/category")

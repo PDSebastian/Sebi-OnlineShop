@@ -1,6 +1,5 @@
-package ro.mycode.sebionlineshop.categories.service.queryService;
+package ro.mycode.sebionlineshop.categories.service;
 
-import ro.mycode.sebionlineshop.categories.dtos.CategoryRequest;
 import ro.mycode.sebionlineshop.categories.dtos.CategoryResponse;
 
 import java.util.List;

@@ -4,25 +4,23 @@ import org.springframework.stereotype.Component;
 import ro.mycode.sebionlineshop.categories.exceptions.CategoryNotFoundException;
 import ro.mycode.sebionlineshop.categories.model.Category;
 import ro.mycode.sebionlineshop.categories.repository.CategoryRepository;
-import ro.mycode.sebionlineshop.categories.service.commandService.CategoryCommandService;
-import ro.mycode.sebionlineshop.categories.service.queryService.CategoryQueryService;
-import ro.mycode.sebionlineshop.costumers.model.Costumer;
+import ro.mycode.sebionlineshop.categories.service.CategoryCommandService;
+import ro.mycode.sebionlineshop.categories.service.CategoryQueryService;
 import ro.mycode.sebionlineshop.costumers.repository.CostumerRepository;
-import ro.mycode.sebionlineshop.costumers.service.commandService.CostumerCommandservice;
-import ro.mycode.sebionlineshop.costumers.service.queryService.CostumerQueryService;
+import ro.mycode.sebionlineshop.costumers.service.CostumerCommandservice;
+import ro.mycode.sebionlineshop.costumers.service.CostumerQueryService;
 import ro.mycode.sebionlineshop.options.exceptions.OptionNotFoundException;
 import ro.mycode.sebionlineshop.options.model.Option;
 import ro.mycode.sebionlineshop.options.repository.Optionrepository;
-import ro.mycode.sebionlineshop.options.service.commandService.OptionCommandService;
-import ro.mycode.sebionlineshop.options.service.queryService.OptionQueryService;
+import ro.mycode.sebionlineshop.options.service.OptionCommandService;
+import ro.mycode.sebionlineshop.options.service.OptionQueryService;
 import ro.mycode.sebionlineshop.products.exceptions.ProductNotFoundException;
 import ro.mycode.sebionlineshop.products.model.Product;
 import ro.mycode.sebionlineshop.products.repository.ProductRepository;
-import ro.mycode.sebionlineshop.products.service.commandService.ProductCommandService;
-import ro.mycode.sebionlineshop.products.service.queryService.ProductQueryService;
+import ro.mycode.sebionlineshop.products.service.ProductCommandService;
+import ro.mycode.sebionlineshop.products.service.ProductQueryService;
 
 import java.util.List;
-
 public class View {
     private final CostumerRepository costumerRepository;
     private final Optionrepository optionrepository;
@@ -51,12 +49,12 @@ public class View {
         this.optionCommandService = optionCommandService;
         this.optionQueryService = optionQueryService;
         this.optionrepository = optionrepository;
-        testGetOptionByName();
+        testDeleteProduct();
 
     }
     void testAddProduct() {
             Product p = Product.builder()
-                    .sku("SKU-123")
+                    .sku("SKU-10003")
                     .name("p1")
                     .description("p1 description")
                     .weight(2121)
@@ -79,8 +77,8 @@ public class View {
 
     }
     void testDeleteProduct() {
-       if(productRepository.existsById(10L)) {
-           productRepository.deleteById(10L);
+       if(productRepository.existsById(11L)) {
+           productRepository.deleteById(11L);
        }
        else {
            throw new ProductNotFoundException();

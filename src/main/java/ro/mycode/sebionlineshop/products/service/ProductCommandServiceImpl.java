@@ -1,4 +1,4 @@
-package ro.mycode.sebionlineshop.products.service.commandService;
+package ro.mycode.sebionlineshop.products.service;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,13 +18,16 @@ public class ProductCommandServiceImpl implements ProductCommandService {
     @Override
     @Transactional
     public ProductResponse addProduct(ProductRequest productRequest) {
-        productRepository.findById(productRequest.id())
-                .ifPresent(product -> {throw new ProductAlreadyExistsException();});
-        Product p= ProductMapper.toEntity(productRequest);
-        Product sp= productRepository.save(p);
+
+        productRepository.findBySku(productRequest.sku())
+                .ifPresent(product -> {
+                    throw new ProductAlreadyExistsException();
+                });
+
+        Product p = ProductMapper.toEntity(productRequest);
+        Product sp = productRepository.save(p);
         return ProductMapper.toDto(sp);
     }
-
     @Override
     @Transactional
     public ProductResponse updateProduct(ProductRequest productRequest) {
@@ -45,12 +48,25 @@ public class ProductCommandServiceImpl implements ProductCommandService {
 
     @Override
     @Transactional
-    public ProductResponse deleteProduct(ProductRequest productRequest) {
-        Product product=productRepository.findById(productRequest.id())
-                .orElseThrow(() ->new ProductNotFoundException());
+    public ProductResponse deleteProduct(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException());
         ProductResponse response = ProductMapper.toDto(product);
         productRepository.delete(product);
         return response;
+
+    }
+
+    @Override
+    @Transactional
+    public ProductResponse updatePatchProduct(Long productId, ProductRequest productRequest) {
+        Product product=productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException());
+        product.setName(productRequest.name());
+        product.setPrice(productRequest.price());
+       ProductResponse response = ProductMapper.toDto(productRepository.save(product));
+       return response;
+
 
     }
 }
