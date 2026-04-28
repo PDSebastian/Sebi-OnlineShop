@@ -42,4 +42,5 @@ public class OrderDetailQueryServiceImpl implements OrderDetailQuesryService{
 
 
     }
+
 }

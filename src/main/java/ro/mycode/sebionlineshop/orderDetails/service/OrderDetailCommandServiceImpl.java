@@ -1,11 +1,11 @@
 package ro.mycode.sebionlineshop.orderDetails.service;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.mycode.sebionlineshop.costumers.exceptions.CostumerNotFoundException;
 import ro.mycode.sebionlineshop.costumers.repository.CostumerRepository;
 import ro.mycode.sebionlineshop.orderDetails.dtos.OrderDetailResponse;
+import ro.mycode.sebionlineshop.orderDetails.dtos.OrederDetailRequest;
 import ro.mycode.sebionlineshop.orderDetails.exceptions.OrderDetailNotFoundException;
 import ro.mycode.sebionlineshop.orderDetails.mapper.OrderDetailMapper;
 import ro.mycode.sebionlineshop.orderDetails.model.OrderDetail;
@@ -25,22 +25,27 @@ public class OrderDetailCommandServiceImpl implements OrderDetailCommandService 
 
     @Override
     @Transactional
-    public OrderDetailResponse addOrderDetail(Long costumerId,OrderDetail orderDetail) {
+    public OrderDetailResponse addOrderDetail(Long costumerId, OrederDetailRequest request) {
         costumerRepository.findById(costumerId)
-                .orElseThrow(()->new CostumerNotFoundException());
+                .orElseThrow(() -> new CostumerNotFoundException());
+
+        OrderDetail orderDetail = OrderDetailMapper.toEntity(request);
 
         OrderDetail saved = orderDetailRepository.save(orderDetail);
-
         return OrderDetailMapper.toDto(saved);
     }
 
     @Override
     @Transactional
-    public OrderDetailResponse updateOrderDetail(OrderDetail orderDetail) {
-        if(orderDetailRepository.existsById(orderDetail.getId())){
-            throw new OrderDetailNotFoundException();
-        }
+    public OrderDetailResponse updateOrderDetail(Long id, OrederDetailRequest request) {
+        OrderDetail orderDetail = orderDetailRepository.findById(id)
+                .orElseThrow(() -> new OrderDetailNotFoundException());
+        orderDetail.setOrderAddress(request.orderAdress());
+        orderDetail.setOrderEmail(request.orderEmail());
+        orderDetail.setOrderDate(request.orderDate());
+
         OrderDetail saved = orderDetailRepository.save(orderDetail);
+
         return OrderDetailMapper.toDto(saved);
     }
 
