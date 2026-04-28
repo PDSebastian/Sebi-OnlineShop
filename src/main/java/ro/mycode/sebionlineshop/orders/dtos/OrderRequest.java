@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 
 @Builder
 public record OrderRequest(
+        @NotNull(message = "ID-ul clientului este obligatoriu")
+        Long customerId,
         @NotNull(message = "Suma totală este obligatorie")
         Double amount,
         @NotBlank(message = "Adresa de livrare este obligatorie")
