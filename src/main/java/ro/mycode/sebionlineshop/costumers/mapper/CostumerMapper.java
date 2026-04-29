@@ -26,8 +26,8 @@ public class CostumerMapper {
                 costumer.getFullName(),
                 costumer.getBillingAddress(),
                 costumer.getDefaultShippingAddress(),
-                costumer.getPhone(),
-                costumer.getCountry()
+                costumer.getCountry(),
+                costumer.getPhone()
         );
     }
 }

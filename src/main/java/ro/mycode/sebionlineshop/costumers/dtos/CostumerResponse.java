@@ -14,6 +14,5 @@ public record CostumerResponse(
         String billingAddress,
         String defaultShippingAddress,
         String country,
-        String phone
+        String phoneNumber
 ) {}
-
