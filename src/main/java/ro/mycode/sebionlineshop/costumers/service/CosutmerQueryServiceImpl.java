@@ -9,7 +9,7 @@ import ro.mycode.sebionlineshop.costumers.repository.CostumerRepository;
 import java.util.List;
 
 @Component
-public class CosutmerQueryServiceImpl implements CostumerQueryService {
+public class    CosutmerQueryServiceImpl implements CostumerQueryService {
     private CostumerRepository costumerRepository;
     public CosutmerQueryServiceImpl(CostumerRepository costumerRepository) {
         this.costumerRepository = costumerRepository;

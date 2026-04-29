@@ -23,11 +23,11 @@ public class ProductCaregoryController {
     }
     @PostMapping("/add")
     public ResponseEntity<ProductCategoryResponse> addProductCategory(@RequestBody ProductCategoryRequest productCategoryRequest) {
-        log.debug(" http://localhost:8080/api/v2/productCategory");
         ProductCategory productCategory = ProductCategoryMapper.toEntity(productCategoryRequest);
         ProductCategoryResponse response = productCategoryCommandService.addProductCategory(productCategory);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
 
 
 

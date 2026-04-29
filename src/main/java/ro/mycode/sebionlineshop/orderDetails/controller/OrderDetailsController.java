@@ -59,7 +59,9 @@ public class OrderDetailsController {
         log.debug("http://localhost:8080/api/v2/order-details/delete/{id}", id);
         orderDetailCommandService.deleteOrderDetail(id);
         return ResponseEntity.ok(orderDetailQuesryService.getOrderDetailById(id));
+
     }
+
 
 
 

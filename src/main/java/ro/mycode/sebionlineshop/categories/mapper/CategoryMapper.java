@@ -10,6 +10,7 @@ public class CategoryMapper {
         return Category.builder()
                 .name(categoryRequest.name())
                 .description(categoryRequest.description())
+                .thumbnail(categoryRequest.thumbnail())
                 .build();
     }
 public static CategoryResponse toDto(Category category) {
