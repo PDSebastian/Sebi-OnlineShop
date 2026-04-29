@@ -60,7 +60,7 @@ public class CostumersIntegrationTests {
                 .country(country)
                 .build();
 
-        MvcResult mvcResult = mockMvc.perform(post("/api/v2/costumers/").
+        MvcResult mvcResult = mockMvc.perform(post("/api/v2/costumers/add").
                         contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(costumerRequest)))
                 .andExpect(status().isCreated())
@@ -96,6 +96,7 @@ public class CostumersIntegrationTests {
                 .defaultShippingAddress(defaultShippingAddress)
                 .country(country)
                 .build();
+        costumerRepository.save(costmer);
 
         CostumerRequest costumerRequest = CostumerRequest.builder()
                 .fullName(fullName)
@@ -107,7 +108,7 @@ public class CostumersIntegrationTests {
                 .country(country)
                 .build();
 
-        mockMvc.perform(put("/api/v2/costumers")
+        mockMvc.perform(put("/api/v2/costumers/update")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(costumerRequest)))
                 .andExpect(status().isOk())
@@ -145,8 +146,6 @@ public class CostumersIntegrationTests {
 //    }
 
 }
-
-
 
 
 
