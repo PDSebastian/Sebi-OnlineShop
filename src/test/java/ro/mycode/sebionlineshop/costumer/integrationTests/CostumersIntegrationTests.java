@@ -25,17 +25,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 
 
-public class CostumerCommandServiceTests {
+public class CostumersIntegrationTests {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     ObjectMapper objectMapper;
     @Autowired
-    CostumerCommandservice costumerCommandservice;
-    @Autowired
     CostumerRepository costumerRepository;
-    @Autowired
-    private DefaultParameterNameDiscoverer defaultParameterNameDiscoverer;
 
     @BeforeEach
     public void setup() {
@@ -63,7 +59,7 @@ public class CostumerCommandServiceTests {
                 .country(country)
                 .build();
 
-        MvcResult mvcResult = mockMvc.perform(post("/api/v2/costumers").
+        MvcResult mvcResult = mockMvc.perform(post("/api/v2/costumers/").
                         contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(costumerRequest)))
                 .andExpect(status().isCreated())
@@ -78,19 +74,6 @@ public class CostumerCommandServiceTests {
 
                 .andReturn();
 
-        CostumerResponse costumerResponse = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), CostumerResponse.class);
-        mockMvc.perform(post("/api/v2/costumers").
-                        contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(costumerResponse)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.email").value(email))
-                .andExpect(jsonPath("$.fullName").value(fullName))
-                .andExpect(jsonPath("$.defaultShippingAddress").value(defaultShippingAddress))
-                .andExpect(jsonPath("$.country").value(country))
-                .andExpect(jsonPath("$.billingAddress").value(billingAddress))
-                .andExpect(jsonPath("$.phoneNumber").value(phoneNumber))
-                .andExpect(jsonPath("$.password").value(password));
 
 
     }

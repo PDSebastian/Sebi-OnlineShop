@@ -96,6 +96,32 @@ public class CategoriesCommandServiceTests {
             categoryCommandService.deleteCategory(id);
         });
     }
+    @Test
+    public void updateCategorySuccess() {
+        String name="a";
+        String description="b";
+        String thumbnail="c";
+
+        String newDescription="d";
+        String newThumbnail="e";
+
+
+        categoryRepository.save(Category.builder()
+                .name(name)
+                .description(description)
+                .thumbnail(thumbnail)
+                .build());
+
+        CategoryRequest updateRequest=CategoryRequest.builder()
+                .name(name)
+                .description(newDescription)
+                .thumbnail(newThumbnail)
+                .build();
+        CategoryResponse categoryResponse=categoryCommandService.updateCategory(updateRequest);
+        assertEquals(name, categoryResponse.name());
+        assertEquals(newDescription, categoryResponse.description());
+
+    }
 
 
 
