@@ -13,10 +13,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import ro.mycode.sebionlineshop.costumers.dtos.CostumerRequest;
 import ro.mycode.sebionlineshop.costumers.dtos.CostumerResponse;
+import ro.mycode.sebionlineshop.costumers.model.Costumer;
 import ro.mycode.sebionlineshop.costumers.repository.CostumerRepository;
 import ro.mycode.sebionlineshop.costumers.service.CostumerCommandservice;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -77,6 +78,72 @@ public class CostumersIntegrationTests {
 
 
     }
+    @Test
+    public void updateCostumerSuccess() throws Exception {
+        String fullName = "a";
+        String email = "b";
+        String password = "c";
+        String phoneNumber = "d";
+        String billingAddress = "e";
+        String defaultShippingAddress = "f";
+        String country = "g";
+        Costumer costmer=Costumer.builder()
+                .fullName(fullName)
+                .email(email)
+                .password(password)
+                .phone(phoneNumber)
+                .billingAddress(billingAddress)
+                .defaultShippingAddress(defaultShippingAddress)
+                .country(country)
+                .build();
+
+        CostumerRequest costumerRequest = CostumerRequest.builder()
+                .fullName(fullName)
+                .email(email)
+                .password(password)
+                .phone(phoneNumber)
+                .billingAddress(billingAddress)
+                .defaultShippingAddress(defaultShippingAddress)
+                .country(country)
+                .build();
+
+        mockMvc.perform(put("/api/v2/costumers")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(costumerRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fullName").value(fullName))
+                .andExpect(jsonPath("$.email").value(email))
+                .andExpect(jsonPath("$.password").value(password))
+                .andExpect(jsonPath("$.billingAddress").value(billingAddress))
+                .andExpect(jsonPath("$.defaultShippingAddress").value(defaultShippingAddress))
+                .andExpect(jsonPath("$.country").value(country))
+                .andExpect(jsonPath("$.phoneNumber").value(phoneNumber));
+
+    }
+//    @Test
+//    public void deleteCostumerSuccess() throws Exception {
+//        String fullName = "a";
+//        String email = "b";
+//        String password = "c";
+//        String phoneNumber = "d";
+//        String billingAddress = "e";
+//        String defaultShippingAddress = "f";
+//        String country = "g";
+//        Costumer costmer=Costumer.builder()
+//                .fullName(fullName)
+//                .email(email)
+//                .password(password)
+//                .phone(phoneNumber)
+//                .billingAddress(billingAddress)
+//                .defaultShippingAddress(defaultShippingAddress)
+//                .country(country)
+//                .build();
+//
+//        mockMvc.perform(delete("/api/v2/costumers"))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.id").value(costmer.getId()));
+//    }
+
 }
 
 

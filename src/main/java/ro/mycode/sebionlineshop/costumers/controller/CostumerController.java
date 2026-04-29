@@ -40,7 +40,7 @@ public class CostumerController {
         CostumerResponse response = costumerCommandservice.deleteCostumer(costumerId);
         return ResponseEntity.status(HttpStatus.OK).body(response) ;
     }
-    @PutMapping("/update")
+    @PutMapping("update")
     public ResponseEntity<CostumerResponse> updateCostumer(@RequestBody CostumerRequest costumerRequest) {
         log.debug("http://localhost:8080/api/v2/costumers/update");
         CostumerResponse response = costumerCommandservice.updateCostumer(costumerRequest);
