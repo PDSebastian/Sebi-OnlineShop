@@ -121,29 +121,66 @@ public class CostumersIntegrationTests {
                 .andExpect(jsonPath("$.phoneNumber").value(phoneNumber));
 
     }
-//    @Test
-//    public void deleteCostumerSuccess() throws Exception {
-//        String fullName = "a";
-//        String email = "b";
-//        String password = "c";
-//        String phoneNumber = "d";
-//        String billingAddress = "e";
-//        String defaultShippingAddress = "f";
-//        String country = "g";
-//        Costumer costmer=Costumer.builder()
-//                .fullName(fullName)
-//                .email(email)
-//                .password(password)
-//                .phone(phoneNumber)
-//                .billingAddress(billingAddress)
-//                .defaultShippingAddress(defaultShippingAddress)
-//                .country(country)
-//                .build();
-//
-//        mockMvc.perform(delete("/api/v2/costumers"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").value(costmer.getId()));
-//    }
+    @Test
+    public void deleteCostumerSuccess() throws Exception {
+        String fullName = "a";
+        String email = "b";
+        String password = "c";
+        String phoneNumber = "d";
+        String billingAddress = "e";
+        String defaultShippingAddress = "f";
+        String country = "g";
+        Costumer costmer=Costumer.builder()
+                .fullName(fullName)
+                .email(email)
+                .password(password)
+                .phone(phoneNumber)
+                .billingAddress(billingAddress)
+                .defaultShippingAddress(defaultShippingAddress)
+                .country(country)
+                .build();
+        costumerRepository.save(costmer);
+
+        mockMvc.perform(delete("/api/v2/costumers/delete/"+costmer.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(costmer.getId()));
+    }
+    @Test
+    public void getAllCostumersSuccess() throws Exception {
+        String fullName = "a";
+        String email = "b";
+        String password = "c";
+        String phoneNumber = "d";
+        String billingAddress = "e";
+        String defaultShippingAddress = "f";
+        String country = "g";
+
+
+        Costumer costmer=Costumer.builder()
+                .fullName(fullName)
+                .email(email)
+                .password(password)
+                .phone(phoneNumber)
+                .billingAddress(billingAddress)
+                .defaultShippingAddress(defaultShippingAddress)
+                .country(country)
+                .build();
+
+
+        costumerRepository.save(costmer);
+
+
+        mockMvc.perform(get("/api/v2/costumers/all"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fullName").value(fullName))
+                .andExpect(jsonPath("$.email").value(email))
+                .andExpect(jsonPath("$.password").value(password))
+                .andExpect(jsonPath("$.billingAddress").value(billingAddress))
+                .andExpect(jsonPath("$.defaultShippingAddress").value(defaultShippingAddress))
+                .andExpect(jsonPath("$.country").value(country));
+
+
+    }
 
 }
 
