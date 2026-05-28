@@ -12,4 +12,6 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     boolean existsByOrderEmail(String email);
 
     List<Order> findOrderByOrderEmail(String orderEmail);
+
+    Order findOrderById(Long orderId);
 }

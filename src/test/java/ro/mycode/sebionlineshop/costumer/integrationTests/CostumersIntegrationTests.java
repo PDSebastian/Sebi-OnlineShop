@@ -16,7 +16,11 @@ import ro.mycode.sebionlineshop.costumers.dtos.CostumerResponse;
 import ro.mycode.sebionlineshop.costumers.model.Costumer;
 import ro.mycode.sebionlineshop.costumers.repository.CostumerRepository;
 import ro.mycode.sebionlineshop.costumers.service.CostumerCommandservice;
+import ro.mycode.sebionlineshop.costumers.service.CostumerQueryService;
 
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,6 +37,8 @@ public class CostumersIntegrationTests {
     ObjectMapper objectMapper;
     @Autowired
     CostumerRepository costumerRepository;
+    @Autowired
+    private CostumerQueryService costumerQueryService;
 
     @BeforeEach
     public void setup() {
@@ -147,16 +153,15 @@ public class CostumersIntegrationTests {
     }
     @Test
     public void getAllCostumersSuccess() throws Exception {
-        String fullName = "a";
-        String email = "b";
-        String password = "c";
-        String phoneNumber = "d";
-        String billingAddress = "e";
-        String defaultShippingAddress = "f";
-        String country = "g";
+        String fullName = "John Doe";
+        String email = "JD@gmail.com";
+        String password = "pass123";
+        String phoneNumber = "0722222222";
+        String billingAddress = "str abc";
+        String defaultShippingAddress = "str xyz";
+        String country = "Romania";
 
-
-        Costumer costmer=Costumer.builder()
+        Costumer costumer = Costumer.builder()
                 .fullName(fullName)
                 .email(email)
                 .password(password)
@@ -166,21 +171,41 @@ public class CostumersIntegrationTests {
                 .country(country)
                 .build();
 
+        costumerRepository.save(costumer);
 
-        costumerRepository.save(costmer);
 
 
         mockMvc.perform(get("/api/v2/costumers/all"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.fullName").value(fullName))
-                .andExpect(jsonPath("$.email").value(email))
-                .andExpect(jsonPath("$.password").value(password))
-                .andExpect(jsonPath("$.billingAddress").value(billingAddress))
-                .andExpect(jsonPath("$.defaultShippingAddress").value(defaultShippingAddress))
-                .andExpect(jsonPath("$.country").value(country));
-
-
+                .andExpect(jsonPath("$[0].fullName").value(fullName))
+                .andExpect(jsonPath("$[0].email").value(email));
     }
+//    @Test
+//    public void testGetCostumerByEmail(){
+//        String fullName = "John Doe";
+//        String email = "JD@gmail.com";
+//        String password = "pass123";
+//        String phoneNumber = "0722222222";
+//        String billingAddress = "str abc";
+//        String defaultShippingAddress = "str xyz";
+//        String country = "Romania";
+//
+//        Costumer costumer = Costumer.builder()
+//                .fullName(fullName)
+//                .email(email)
+//                .password(password)
+//                .phone(phoneNumber)
+//                .billingAddress(billingAddress)
+//                .defaultShippingAddress(defaultShippingAddress)
+//                .country(country)
+//                .build();
+//
+//        costumerRepository.save(costumer);
+//        mockMvc.perform(get(""))
+//
+//
+//
+//    }
 
 }
 

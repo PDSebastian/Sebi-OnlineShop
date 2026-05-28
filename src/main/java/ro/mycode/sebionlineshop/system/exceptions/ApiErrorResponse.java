@@ -6,8 +6,16 @@ import java.time.LocalDateTime;
 
 @Builder
 public record ApiErrorResponse(
-        int state,
-        String message,
-        LocalDateTime dateTime
+      String timestamp,
+      int status,
+      String error,
+      String message
+
+
 ) {
+
+    public static ApiErrorResponse of(int status,String timstamp,String error,String message){
+        return ApiErrorResponse.of(status,timstamp,error,message);
+    }
+
 }

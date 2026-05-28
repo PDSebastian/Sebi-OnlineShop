@@ -7,7 +7,6 @@ import ro.mycode.sebionlineshop.costumers.model.Costumer;
 import ro.mycode.sebionlineshop.costumers.repository.CostumerRepository;
 import ro.mycode.sebionlineshop.orders.dtos.OrderRequest;
 import ro.mycode.sebionlineshop.orders.dtos.OrderResponse;
-import ro.mycode.sebionlineshop.orders.exceptions.OrderAlreadyExistsException;
 import ro.mycode.sebionlineshop.orders.exceptions.OrderNotFoundException;
 import ro.mycode.sebionlineshop.orders.mapper.OrderMapper;
 import ro.mycode.sebionlineshop.orders.model.Order;

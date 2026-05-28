@@ -19,8 +19,9 @@ import ro.mycode.sebionlineshop.productOptions.exceptions.ProductOptionAlreadyEx
 import ro.mycode.sebionlineshop.productOptions.exceptions.ProductOptionNotFoundException;
 import ro.mycode.sebionlineshop.products.exceptions.ProductAlreadyExistsException;
 import ro.mycode.sebionlineshop.products.exceptions.ProductNotFoundException;
+import ro.mycode.sebionlineshop.user.exceptions.UserAlreadyExistsException;
+import ro.mycode.sebionlineshop.user.exceptions.UserNotFoundException;
 
-import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -33,6 +34,7 @@ public class GlobalExceptionHandler {
                 OrderAlreadyExistsException.class,
                 ProductCategoryAlreadyExistsException.class,
                 ProductOptionAlreadyExistsException.class,
+                UserAlreadyExistsException.class,
 
 
         })
@@ -40,8 +42,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse>handleBadRequest(RuntimeException e){
         ApiErrorResponse apiErrorResponse=ApiErrorResponse.builder()
                 .message(e.getMessage())
-                .state(HttpStatus.BAD_REQUEST.value())
-                .dateTime(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrorResponse);
     }
@@ -54,13 +55,13 @@ public class GlobalExceptionHandler {
              OrderNotFoundException.class,
              ProductCategoryNotFoundException.class,
              ProductOptionNotFoundException.class,
+             UserNotFoundException.class
 
         })
     public ResponseEntity<ApiErrorResponse>handleNotFound(RuntimeException e){
             ApiErrorResponse apiErrorResponse=ApiErrorResponse.builder()
                     .message(e.getMessage())
-                    .state(HttpStatus.BAD_REQUEST.value())
-                    .dateTime(LocalDateTime.now())
+                    .status(HttpStatus.BAD_REQUEST.value())
                     .build();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrorResponse);
      }

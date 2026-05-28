@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CategoryCommandServiceImplTest {
+public class    CategoryCommandServiceImplTest {
     @Mock
     private CategoryRepository categoryRepository;
 
