@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ro.mycode.sebionlineshop.products.dtos.ProductRequest;
 import ro.mycode.sebionlineshop.products.dtos.ProductResponse;
@@ -24,6 +25,7 @@ public class ProductController {
         this.productQueryService = productQueryService;
     }
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('product:add')")
     public ResponseEntity<ProductResponse> addProduct(@Valid @RequestBody ProductRequest productRequest){
         log.debug("http delete /api/v2/products/delete/{id}");
         ProductResponse savedProduct = productCommandService.addProduct(productRequest);
@@ -32,6 +34,7 @@ public class ProductController {
 
     }
     @DeleteMapping("/delete/{productId}")
+    @PreAuthorize("hasAuthority('product:delete')")
     public ResponseEntity<ProductResponse> deleteProduct(@PathVariable Long productId){
         log.debug("http post /api/v2/products/delete/{productId}",productId);
         ProductResponse deletedProduct = productCommandService.deleteProduct(productId);
@@ -45,6 +48,7 @@ public class ProductController {
 
     }
     @PatchMapping("/patch/products/{productId}")
+    @PreAuthorize("hasAuthority('product:edit')")
     public ResponseEntity<ProductResponse> patchProduct(@PathVariable Long productId, @RequestBody ProductRequest productRequest){
         log.debug("http patch /api/v2/products/patch/{productId}",productId,productRequest);
         ProductResponse productResponse=productCommandService.updatePatchProduct(productId,productRequest);

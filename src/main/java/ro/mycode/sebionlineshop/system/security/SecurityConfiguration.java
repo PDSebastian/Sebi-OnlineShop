@@ -3,6 +3,7 @@ package ro.mycode.sebionlineshop.system.security;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,36 +20,38 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.stereotype.Component;
+import ro.mycode.sebionlineshop.user.service.UserDetailService;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
-@Component
+@Configuration
 @EnableMethodSecurity
 public class SecurityConfiguration {
+
     private final UserDetailsService userDetailsService;
     private final String secretKey;
     private final SecurityAccessDeniedHandler securityAccessDeniedHandler;
-    private final JWTAuthentificationEntryPoint jwtAuthenticationEntryPoint;
+    private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     public SecurityConfiguration(UserDetailsService userDetailsService,
                                  @Value("${application.jwt.secretKey}") String secretKey,
-                                 JWTAuthentificationEntryPoint jwtAuthenticationEntryPoint,
+                                 JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint,
                                  SecurityAccessDeniedHandler securityAccessDeniedHandler) {
         this.userDetailsService = userDetailsService;
         this.secretKey = secretKey;
         this.securityAccessDeniedHandler = securityAccessDeniedHandler;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -56,9 +59,9 @@ public class SecurityConfiguration {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationConverter customConverter) throws Exception { // <-- ADĂUGAT CA PARAMETRU AICI
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> {})
@@ -70,9 +73,9 @@ public class SecurityConfiguration {
                         .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())
                 .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint((AuthenticationEntryPoint) jwtAuthenticationEntryPoint)
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                         .accessDeniedHandler(securityAccessDeniedHandler))
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)));
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(customConverter)));
 
         return http.build();
     }
@@ -97,7 +100,4 @@ public class SecurityConfiguration {
         converter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
         return converter;
     }
-
-
-
 }

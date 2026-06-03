@@ -2,20 +2,22 @@ package ro.mycode.sebionlineshop.system.exceptions;
 
 import lombok.Builder;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Builder
 public record ApiErrorResponse(
-      String timestamp,
-      int status,
-      String error,
-      String message
+        String timestamp,
+        int status,
+        String error,
+        String message,
+        String path
 
 
 ) {
 
-    public static ApiErrorResponse of(int status,String timstamp,String error,String message){
-        return ApiErrorResponse.of(status,timstamp,error,message);
+    public static ApiErrorResponse of(int status, String error, String message,String path) {
+        return new ApiErrorResponse(Instant.now().toString(), status, error, message,path);
     }
 
 }
