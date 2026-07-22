@@ -10,7 +10,7 @@
         <relativePath/> </parent>
 
     <groupId>ro.mycode</groupId>
-    <artifactId>company-planes</artifactId>
+    <artifactId>sebi-online-shop</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>company-planes</name>
     <description>company-planes</description>
