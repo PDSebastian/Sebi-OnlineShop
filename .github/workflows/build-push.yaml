@@ -51,3 +51,16 @@ jobs:
           context: .
           push: true
           tags: ${{ env.IMAGE }}:${{ steps.tag.outputs.value }}
+
+  notify:
+    needs: [test, build-push,]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mesaj pe Slack
+        uses: slackapi/slack-github-action@v4.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: "${{ contains(needs.*.result, 'failure') && ':x: PICAT' || ':white_check_mark: OK' }} *${{ github.repository }}* `${{ needs.build-push.outputs.tag || github.sha }}`\ntest: ${{ needs.test.result }} · build-push: ${{ needs.build-push.result }} · update-compose: ${{ needs.update-compose.result }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Vezi run-ul>"
