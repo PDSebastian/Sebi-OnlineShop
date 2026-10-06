@@ -1,16 +1,14 @@
-version: '3.8'
-
 services:
   mysql-server:
     image: mysql:8.4
-    container_name: sebi-onlineshop-mysql
+    container_name: mysql_server3
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: sebi_OnlineShop_db
     ports:
-      - "3310:3306"
+      - "3309:3306"
     volumes:
-      - mysql_onlineshop_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
       interval: 5s
@@ -19,18 +17,20 @@ services:
       start_period: 20s
     restart: unless-stopped
 
-  app:
-    image: sebi123q/sebi-online-shop-app:1.0
-    container_name: sebi-online-shop-app
+  sebi-onlineshop-app:
+    image: sebi123q/sebi-online-schop-api:1.0
+    container_name: sebi-online-shop-spring-api
     ports:
-      - "8080:8080"
+      - "8085:8084"
     environment:
-      DB_URL: jdbc:mysql://mysql-server:3306/sebi_OnlineShop_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
-      JPA_SHOW_SQL: "true"
+      DB_URL: jdbc:mysql://mysql-server:3306/online_shop_spring?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      JWT_SECRET_KEY: "asdasdasdasdasd123344asdasdasdasdasasd12321332sadasXYZ0123456789ABCDEF"
     depends_on:
       mysql-server:
         condition: service_healthy
     restart: unless-stopped
 
 volumes:
-  mysql_onlineshop_data:
+  mysql_data:

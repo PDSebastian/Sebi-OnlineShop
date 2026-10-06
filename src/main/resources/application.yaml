@@ -1,28 +1,25 @@
 spring:
+  application:
+    name: sebi-online-shop-app
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/sebi_OnlineShop_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
+    url: ${DB_URL:jdbc:mysql://localhost:3309/sebi_OnlineShop_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
   jpa:
     hibernate:
       ddl-auto: update
     naming:
       physical-strategy: org.springframework.boot.autoconfigure.orm.jpa.CamelCaseToUnderscoresNamingStrategy
     show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
 
 server:
-  port: 8080
+  port: 8084
   error:
     include-stacktrace: never
 
 application:
   jwt:
-    tokenPrefix: "Bearer"
-    tokenExpirationAfterDays: 7
     secretKey: ${JWT_SECRET_KEY:asdasdasdasdasd123344asdasdasdasdasasd12321332sadasXYZ0123456789ABCDEF}
+    tokenPrefix: "Bearer "
+    tokenExpirationAfterDays: 7
 
