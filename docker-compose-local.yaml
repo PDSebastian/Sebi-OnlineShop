@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
 
   sebi-onlineshop-app:
-    image: sebi123q/sebi-online-schop-api:1.0
+    image: sebi123q/sebi-online-schop-api:sha-88b5741
     container_name: sebi-online-shop-spring-api
     ports:
       - "8085:8084"
