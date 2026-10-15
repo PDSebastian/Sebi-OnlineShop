@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 env:
-  IMAGE: sebi123q/sebi-online-schop-api
+  IMAGE: sebi123q/sebi-online-schop-api:sha-88b5741
   RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
 jobs:
